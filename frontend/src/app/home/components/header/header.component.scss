@@ -1,0 +1,54 @@
+.toolbar-wrapper {
+  display: flex;
+  max-width: 1128px;
+  margin: auto;
+}
+
+.linkedin-logo {
+  font-size: 40px;
+}
+
+.me-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-header {
+  border-bottom: 1px solid var(--ion-color-light-tint);
+}
+
+ion-searchbar {
+  --box-shadow: none;
+  transform: scale(0.8);
+  margin-left: -40px;
+}
+
+ion-icon {
+  font-size: 24px;
+}
+
+ion-col {
+  width: 80px !important;
+  text-align: center;
+}
+
+ion-col div, ion-badge {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+ion-badge {
+  position: absolute;
+  left: 40px;
+  top: 0;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+}
+
+ion-avatar {
+  width: 24px;
+  height: 24px;
+  margin: auto;
+}

@@ -1,0 +1,60 @@
+<ion-header class="ion-container ion-no-border">
+  <ion-toolbar>
+    <div class="toolbar-wrapper">
+      <ion-buttons slot="start" class="ion-no-padding">
+        <ion-button>
+          <ion-icon
+            color="primary"
+            class="linkedin-logo"
+            name="logo-linkedin"
+          ></ion-icon>
+        </ion-button>
+        <ion-searchbar
+          color="tertiary"
+          class="ion-hide-lg-down"
+          placeholder="Search"
+        ></ion-searchbar>
+      </ion-buttons>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-end">
+          <ion-col size="auto">
+            <ion-icon name="home"></ion-icon>
+            <div>Home</div>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="people"></ion-icon>
+            <div>Network</div>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="briefcase"></ion-icon>
+            <div>Jobs</div>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="chatbox-ellipses"></ion-icon>
+            <div>Messages</div>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="notifications"></ion-icon>
+            <ion-badge color="danger">
+              2
+            </ion-badge>
+            <div>Notifications</div>
+          </ion-col>
+          <ion-col (click)="presentPopover($event)" size="auto">
+            <ion-avatar>
+              <ion-img src="https://asbe.org/wp-content/uploads/2019/11/Male.jpg"></ion-img>
+            </ion-avatar>
+            <div class="me-wrapper">
+              Me
+              <ion-icon
+                style="font-size: 16px"
+                name="caret-down-outline"
+              ></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-toolbar>
+</ion-header>
