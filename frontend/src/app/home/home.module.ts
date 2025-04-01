@@ -5,10 +5,29 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import {BasePopoverComponent, HeaderComponent} from './components';
+import {
+  AdvertisementComponent,
+  BasePopoverComponent,
+  HeaderComponent, PostModalComponent,
+  ProfileSummaryComponent,
+  StartPostComponent
+} from './components';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
-  declarations: [HomePage, HeaderComponent, BasePopoverComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    HomePageRoutingModule
+  ],
+  declarations: [
+    HomePage,
+    AdvertisementComponent,
+    BasePopoverComponent,
+    HeaderComponent,
+    PostModalComponent,
+    ProfileSummaryComponent,
+    StartPostComponent
+  ]
 })
 export class HomePageModule {}

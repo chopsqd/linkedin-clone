@@ -18,8 +18,36 @@ ion-app {
   background-color: #f3f2ef;
 }
 
+.item-divider {
+  border-bottom: 1px solid var(--ion-color-light-tint);
+}
+
 .custom-popover .popover-content {
   width: 300px;
   margin-top: 16px;
   --box-shadow: none;
+  --background: none;
+}
+
+.custom-modal {
+  --width: 552px;
+  --height: 400px;
+  margin-top: -400px;
+
+  ion-grid {
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+  ion-textarea {
+    --padding-top: 0;
+  }
+}
+
+ion-button {
+  text-transform: initial;
+
+  ion-text {
+    margin-left: 8px;
+  }
 }

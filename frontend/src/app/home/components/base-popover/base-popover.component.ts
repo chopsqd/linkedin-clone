@@ -6,15 +6,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./base-popover.component.scss'],
 })
 export class BasePopoverComponent implements OnInit {
-
-  constructor() {
-  }
+  constructor() {}
 
   onSignOut() {
     console.log('onSignOut');
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
