@@ -24,7 +24,5 @@ export class StartPostComponent implements OnInit {
     console.log('DATA', data)
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

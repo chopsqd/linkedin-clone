@@ -6,11 +6,11 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import {
-  AdvertisementComponent,
+  AdvertisementComponent, AllPostsComponent,
   BasePopoverComponent,
   HeaderComponent, PostModalComponent,
   ProfileSummaryComponent,
-  StartPostComponent
+  StartPostComponent, TabsComponent
 } from './components';
 
 @NgModule({
@@ -22,12 +22,14 @@ import {
   ],
   declarations: [
     HomePage,
+    AllPostsComponent,
     AdvertisementComponent,
     BasePopoverComponent,
     HeaderComponent,
     PostModalComponent,
     ProfileSummaryComponent,
-    StartPostComponent
+    StartPostComponent,
+    TabsComponent
   ]
 })
 export class HomePageModule {}
