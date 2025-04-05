@@ -1,17 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
-  styleUrls: ['./auth.page.scss'],
+  styleUrls: ['./auth.page.scss']
 })
 export class AuthPage implements OnInit {
   @ViewChild('form') form: NgForm;
 
   submissionType: 'login' | 'join' = 'login';
 
-  constructor() { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
   onSubmit() {
     const { email, password, firstName, lastName } = this.form.value;
@@ -21,9 +26,15 @@ export class AuthPage implements OnInit {
     }
 
     if (this.submissionType === 'login') {
-      console.log('Login');
+      return this.authService.login(email, password)
+        .subscribe(() => {
+          this.router.navigateByUrl('/home');
+        });
     } else {
-      console.log('Join');
+      return this.authService.register({ firstName, lastName, password, email })
+        .subscribe(() => {
+          this.toggleSubmissionType();
+        });
     }
   }
 

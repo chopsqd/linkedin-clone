@@ -8,7 +8,7 @@ import {BasePopoverComponent} from '../base-popover/base-popover.component';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private popoverController: PopoverController) { }
+  constructor(private readonly popoverController: PopoverController) { }
 
   async presentPopover(event: Event) {
     const popover = await this.popoverController.create({

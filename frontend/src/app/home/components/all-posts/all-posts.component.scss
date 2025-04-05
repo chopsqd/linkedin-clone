@@ -40,6 +40,15 @@
         margin: 0;
         padding: 0 16px;
       }
+
+      .post-actions {
+        margin-top: -32px;
+      }
+
+      .post-actions ion-icon {
+        font-size: 18px;
+        cursor: pointer;
+      }
     }
 
     ion-avatar {

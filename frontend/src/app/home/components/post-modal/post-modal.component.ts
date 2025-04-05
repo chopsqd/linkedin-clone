@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
 
@@ -10,7 +10,9 @@ import {ModalController} from '@ionic/angular';
 export class PostModalComponent implements OnInit {
   @ViewChild('form') form: NgForm;
 
-  constructor(private modalController: ModalController) {
+  @Input() postId?: number;
+
+  constructor(private readonly modalController: ModalController) {
   }
 
   async onDismiss() {
@@ -23,9 +25,7 @@ export class PostModalComponent implements OnInit {
     }
 
     const body = this.form.value.body;
-    this.modalController.dismiss({
-      post: { body, createdAt: new Date() }
-    }, 'post');
+    this.modalController.dismiss({ post: { body } }, 'post');
   }
 
   ngOnInit() {

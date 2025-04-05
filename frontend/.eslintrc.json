@@ -35,6 +35,17 @@
             "prefix": "app",
             "style": "camelCase"
           }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "objectLiteralProperty",
+            "format": ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+            "filter": {
+              "regex": "^(Content-Type|Accept|Authorization)$",
+              "match": false
+            }
+          }
         ]
       }
     },
