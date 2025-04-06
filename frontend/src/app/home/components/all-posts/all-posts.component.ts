@@ -1,17 +1,18 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, Subscription, take } from 'rxjs';
 import {Post} from '../../models';
 import {PostService} from '../../services/post.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
+import { User } from "../../../auth/models/user.model";
 
 @Component({
   selector: 'app-all-posts',
   templateUrl: './all-posts.component.html',
   styleUrls: ['./all-posts.component.scss'],
 })
-export class AllPostsComponent implements OnInit, OnChanges {
+export class AllPostsComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @Input() postBody?: string;
 
@@ -21,6 +22,8 @@ export class AllPostsComponent implements OnInit, OnChanges {
   skipPosts = 0;
 
   userId$ = new BehaviorSubject<number>(null);
+
+  private userSubscription: Subscription;
 
   constructor(
     private readonly postService: PostService,
@@ -37,11 +40,16 @@ export class AllPostsComponent implements OnInit, OnChanges {
 
     this.postService.getSelectedPosts(this.queryParams).subscribe(
       (posts: Post[]) => {
-        for(const post of posts) {
-          this.allLoadedPosts.push(post);
-        }
+        const processedPosts = posts.map(post => ({
+          ...post,
+          fullImagePath: post.author.imagePath
+            ? this.authService.getFullImageName(post.author.imagePath)
+            : this.authService.getDefaultFullImagePath()
+        }));
 
-        if(isInitialLoad) {
+        this.allLoadedPosts.push(...processedPosts);
+
+        if (isInitialLoad) {
           event.target.complete();
         }
 
@@ -87,7 +95,23 @@ export class AllPostsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.userSubscription = this.authService.userStream.subscribe((user: User) => {
+      if (!user?.imagePath) {
+        return;
+      }
+
+      this.allLoadedPosts = this.allLoadedPosts.map(post =>
+        post.author.id === user.id
+          ? {
+            ...post,
+            fullImagePath: this.authService.getFullImageName(user.imagePath)
+          }
+          : post
+      );
+    });
+
     this.getPosts(false, null);
+
     this.authService.userId
       .pipe(take(1))
       .subscribe((userId: number) => {
@@ -102,7 +126,16 @@ export class AllPostsComponent implements OnInit, OnChanges {
     }
 
     this.postService.createPost(postBody).subscribe((post: Post) => {
-      this.allLoadedPosts.unshift(post);
+      this.authService.userFullImagePath
+        .pipe(take(1))
+        .subscribe((fullImagePath: string) => {
+          const updatedPost = { ...post, fullImagePath };
+          this.allLoadedPosts.unshift(updatedPost);
+        });
     });
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 }

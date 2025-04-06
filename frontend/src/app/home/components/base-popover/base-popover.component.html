@@ -4,12 +4,15 @@
       <ion-row class="ion-align-items-center ion-justify-content-center">
         <ion-col size="auto">
           <ion-avatar>
-            <ion-img src="https://asbe.org/wp-content/uploads/2019/11/Male.jpg"></ion-img>
+            <ion-img
+              *ngIf="userFullImagePath"
+              [src]="userFullImagePath"
+            ></ion-img>
           </ion-avatar>
         </ion-col>
 
         <ion-col>
-          <ion-card-title>Chopsqd</ion-card-title>
+          <ion-card-title>{{ fullName }}</ion-card-title>
           <ion-card-subtitle>Full Stack Developer</ion-card-subtitle>
         </ion-col>
       </ion-row>

@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Request, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException, HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+  Request,
+  Res,
+  UseGuards
+} from "@nestjs/common";
 import { DeleteResult, UpdateResult } from "typeorm";
 import { Observable } from "rxjs";
 import { FeedService } from "../services/feed.service";
@@ -45,5 +58,17 @@ export class FeedController {
     @Param() id: number
   ): Observable<DeleteResult> {
     return this.feedService.deletePost(id);
+  }
+
+  @Get('image/:fileName')
+  findImageByName(
+    @Param('fileName') fileName: string,
+    @Res() res
+  ): Observable<Object> {
+    if (!fileName || fileName === 'null' || fileName === '[null]') {
+      throw new HttpException('File name is invalid', HttpStatus.BAD_REQUEST);
+    }
+
+    return res.sendFile(fileName, { root: './images' });
   }
 }

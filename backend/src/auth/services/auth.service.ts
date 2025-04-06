@@ -71,12 +71,4 @@ export class AuthService {
       )
     );
   }
-
-  findUserById(id: number): Observable<UserSafe> {
-    return from(
-      this.userRepository.findOne({ id }, { relations: ["feed_post"] })
-    ).pipe(
-      map(({password, ...userWithoutPassword}: User) => userWithoutPassword)
-    );
-  }
 }

@@ -38,7 +38,12 @@ ion-card {
 ion-card-header {
   margin-top: -54px;
 
+  input[type="file"] {
+    display: none;
+  }
+
   ion-avatar {
+    cursor: pointer;
     width: 72px;
     height: 72px;
     margin: auto;

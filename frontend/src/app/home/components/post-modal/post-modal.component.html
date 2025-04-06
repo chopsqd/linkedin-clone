@@ -20,12 +20,15 @@
     <ion-row class="ion-justify-content-start">
       <ion-col size="auto">
         <ion-avatar>
-          <ion-img src="https://asbe.org/wp-content/uploads/2019/11/Male.jpg"></ion-img>
+          <ion-img
+            *ngIf="userFullImagePath"
+            [src]="userFullImagePath"
+          ></ion-img>
         </ion-avatar>
       </ion-col>
       <ion-col>
         <div>
-          <ion-text>Chopsqd</ion-text>
+          <ion-text>{{ fullName }}</ion-text>
         </div>
         <ion-button size="small" shape="round" fill="outline" color="medium">
           <ion-icon color="dark" name="globe-outline"></ion-icon>

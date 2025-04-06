@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, switchMap, take } from 'rxjs';
 import { Post } from '../models';
 import { environment } from '../../../environments/environment';
-import { Observable, take } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,20 @@ export class PostService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly authService: AuthService
+  ) {
+    this.authService
+      .getUserImageName()
+      .pipe(
+        take(1),
+        switchMap(({ imageName }) =>
+          this.authService.updateUserImagePath(imageName || 'blank-profile-picture.png')
+        )
+      )
+      .subscribe();
+  }
 
   getSelectedPosts(params): Observable<Post[]> {
     return this.http.get<Post[]>(`${environment.baseApiUrl}/feed${params}`);
