@@ -46,7 +46,7 @@ export class FeedController {
   @UseGuards(JwtGuard, IsCreatorGuard)
   @Put(":id")
   update(
-    @Param() id: number,
+    @Param('id') id: number,
     @Body() feedPost: FeedPost
   ): Observable<UpdateResult> {
     return this.feedService.updatePost(id, feedPost);
@@ -55,7 +55,7 @@ export class FeedController {
   @UseGuards(JwtGuard, IsCreatorGuard)
   @Delete(":id")
   delete(
-    @Param() id: number
+    @Param('id') id: number
   ): Observable<DeleteResult> {
     return this.feedService.deletePost(id);
   }

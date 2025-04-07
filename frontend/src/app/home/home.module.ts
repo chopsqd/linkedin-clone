@@ -10,7 +10,9 @@ import {
   BasePopoverComponent,
   HeaderComponent, PostModalComponent,
   ProfileSummaryComponent,
-  StartPostComponent, TabsComponent
+  StartPostComponent, TabsComponent,
+  ConnectionProfileComponent, UserProfileComponent,
+  RequestsPopoverComponent
 } from './components';
 
 @NgModule({
@@ -25,11 +27,14 @@ import {
     AllPostsComponent,
     AdvertisementComponent,
     BasePopoverComponent,
+    ConnectionProfileComponent,
     HeaderComponent,
     PostModalComponent,
     ProfileSummaryComponent,
     StartPostComponent,
-    TabsComponent
+    TabsComponent,
+    UserProfileComponent,
+    RequestsPopoverComponent
   ]
 })
 export class HomePageModule {}

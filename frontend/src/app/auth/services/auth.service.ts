@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, map, Observable, of, switchMap, take, tap } from "rxjs";
+import { BehaviorSubject, from, map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
@@ -14,10 +14,6 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private user$ = new BehaviorSubject<User>(null);
-
-  private httpOptions: { headers: HttpHeaders } = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(
     private readonly http: HttpClient,
@@ -112,8 +108,7 @@ export class AuthService {
     return this.http
       .post<User>(
         `${environment.baseApiUrl}/auth/register`,
-        newUser,
-        this.httpOptions
+        newUser
       )
       .pipe(
         take(1)
@@ -124,8 +119,7 @@ export class AuthService {
     return this.http
       .post<{ token: string }>(
         `${environment.baseApiUrl}/auth/login`,
-        { email, password },
-        this.httpOptions
+        { email, password }
       )
       .pipe(
         take(1),

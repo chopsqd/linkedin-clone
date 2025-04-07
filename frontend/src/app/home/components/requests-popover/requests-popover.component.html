@@ -1,0 +1,42 @@
+<ion-card *ngIf="connectionProfileService?.friendRequests">
+  <ion-card-header>
+    <ion-grid>
+      <ng-container *ngFor="let request of connectionProfileService.friendRequests">
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-col size="auto">
+            <ion-avatar>
+              <ion-img [src]="$any(request).fullImagePath"></ion-img>
+            </ion-avatar>
+          </ion-col>
+
+          <ion-col>
+            <ion-card-title>
+              {{ $any(request).creator.firstName }}
+              {{ $any(request).creator.lastName }}
+            </ion-card-title>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-button
+            (click)="respondToFriendRequest(request.id, 'accepted')"
+            expand="block"
+            size="small"
+            fill="outline"
+            color="primary"
+          >
+            Accept
+          </ion-button>
+          <ion-button
+            (click)="respondToFriendRequest(request.id, 'declined')"
+            expand="block"
+            size="small"
+            fill="outline"
+            color="danger"
+          >
+            Decline
+          </ion-button>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+  </ion-card-header>
+</ion-card>

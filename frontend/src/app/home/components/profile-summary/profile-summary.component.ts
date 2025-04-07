@@ -4,15 +4,10 @@ import { BehaviorSubject, catchError, EMPTY, from, Subscription, switchMap, take
 import { AuthService } from '../../../auth/services/auth.service';
 import { Role } from '../../../auth/models/user.model';
 import { FileTypeResult, fromBuffer } from 'file-type/core';
+import { BannerColorService } from '../../services/banner-color.service';
 
 type ValidFileExtension = 'png' | 'jpg' | 'jpeg';
 type ValidMimeType = 'image/png' | 'image/jpeg';
-
-type BannerColors = {
-  colorOne: string;
-  colorTwo: string;
-  colorThree: string;
-};
 
 @Component({
   selector: 'app-profile-summary',
@@ -25,19 +20,16 @@ export class ProfileSummaryComponent implements OnInit, OnDestroy {
   validFileExtensions: ValidFileExtension[] = ['png', 'jpg', 'jpeg'];
   validMimeTypes: ValidMimeType[] = ['image/png', 'image/jpeg'];
 
-  bannerColors: BannerColors = {
-    colorOne: '#a0b4b7',
-    colorTwo: '#dbe7e9',
-    colorThree: '#bfd3d6',
-  };
-
   fullName$ = new BehaviorSubject<string>(null);
   fullName = '';
 
   userFullImagePath: string;
   private userImagePathSubscription: Subscription;
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(
+    private readonly authService: AuthService,
+    public readonly bannerColorService: BannerColorService,
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -47,7 +39,8 @@ export class ProfileSummaryComponent implements OnInit, OnDestroy {
     this.authService.userRole
       .pipe(take(1))
       .subscribe((role: Role) => {
-        this.bannerColors = this.getBannerColors(role);
+        this.bannerColorService.bannerColors =
+          this.bannerColorService.getBannerColors(role);
       });
 
     this.authService.userFullName
@@ -103,27 +96,5 @@ export class ProfileSummaryComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.form.reset();
-  }
-
-  private getBannerColors(role: Role): BannerColors {
-    const roleColors: Record<Role, BannerColors> = {
-      admin: {
-        colorOne: '#daa520',
-        colorTwo: '#f0e68c',
-        colorThree: '#fafad2',
-      },
-      premium: {
-        colorOne: '#bc8f8f',
-        colorTwo: '#c09999',
-        colorThree: '#ddadaf',
-      },
-      user: {
-        colorOne: '#a0b4b7',
-        colorTwo: '#dbe7e9',
-        colorThree: '#bfd3d6',
-      },
-    };
-
-    return roleColors[role] || this.bannerColors;
   }
 }

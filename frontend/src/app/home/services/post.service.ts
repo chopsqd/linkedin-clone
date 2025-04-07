@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, switchMap, take } from 'rxjs';
 import { Post } from '../models';
 import { environment } from '../../../environments/environment';
@@ -9,10 +9,6 @@ import { AuthService } from '../../auth/services/auth.service';
   providedIn: 'root'
 })
 export class PostService {
-  private httpOptions: { headers: HttpHeaders } = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   constructor(
     private readonly http: HttpClient,
     private readonly authService: AuthService
@@ -34,13 +30,13 @@ export class PostService {
 
   createPost(body: string): Observable<Post> {
     return this.http
-      .post<Post>(`${environment.baseApiUrl}/feed`, { body }, this.httpOptions)
+      .post<Post>(`${environment.baseApiUrl}/feed`, { body })
       .pipe(take(1));
   }
 
   updatePost(postId: number, body: string): Observable<Post> {
     return this.http
-      .put<Post>(`${environment.baseApiUrl}/feed/${postId}`, { body }, this.httpOptions)
+      .put<Post>(`${environment.baseApiUrl}/feed/${postId}`, { body })
       .pipe(take(1));
   }
 

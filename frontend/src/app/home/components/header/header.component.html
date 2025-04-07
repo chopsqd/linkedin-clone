@@ -22,8 +22,18 @@
             <ion-icon name="home"></ion-icon>
             <div>Home</div>
           </ion-col>
-          <ion-col class="ion-hide-md-down" size="auto">
+          <ion-col
+            (click)="presentRequestsPopover($event)"
+            class="ion-hide-md-down"
+            size="auto"
+          >
             <ion-icon name="people"></ion-icon>
+            <ion-badge
+              *ngIf="connectionProfileService.friendRequests?.length"
+              color="danger"
+            >
+              {{ connectionProfileService.friendRequests.length }}
+            </ion-badge>
             <div>Network</div>
           </ion-col>
           <ion-col class="ion-hide-md-down" size="auto">
@@ -39,7 +49,10 @@
             <ion-badge color="danger">2</ion-badge>
             <div>Notifications</div>
           </ion-col>
-          <ion-col (click)="presentPopover($event)" size="auto">
+          <ion-col
+            (click)="presentPopover($event)"
+            size="auto"
+          >
             <ion-avatar>
               <ion-img
                 *ngIf="userFullImagePath"
