@@ -1,12 +1,15 @@
 import { FeedPostEntity } from "../../feed/models/post.entity";
 import { FriendRequest } from "./friend-request.interface";
 import { Role } from "./role.enum";
+import { IsEmail, IsString } from "class-validator";
 
-export interface User {
+export class User {
   id: number;
   firstName: string;
   lastName: string;
+  @IsEmail()
   email: string;
+  @IsString()
   password: string;
   imagePath: string;
   role: Role;

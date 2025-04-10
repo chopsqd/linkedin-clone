@@ -5,7 +5,7 @@ import { from, Observable } from "rxjs";
 
 import { FeedPostEntity } from "../models/post.entity";
 import { FeedPost } from "../models/post.interface";
-import { User } from "../../auth/models/user.interface";
+import { User } from "../../auth/models/user.class";
 
 @Injectable()
 export class FeedService {

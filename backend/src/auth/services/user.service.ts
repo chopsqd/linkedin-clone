@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, UpdateResult } from "typeorm";
 import { from, map, Observable, of, switchMap } from "rxjs";
 import { FriendRequest, FriendRequestStatus } from "../models/friend-request.interface";
 import { FriendRequestEntity } from "../models/friend-request.entity";
-import { User, UserSafe } from "../models/user.interface";
+import { User, UserSafe } from "../models/user.class";
 import { UserEntity } from "../models/user.entity";
 
 @Injectable()
@@ -20,7 +20,13 @@ export class UserService {
     return from(
       this.userRepository.findOne({ id }, { relations: ["feedPosts"] })
     ).pipe(
-      map(({ password, ...userWithoutPassword }: User) => userWithoutPassword)
+      map((user: User) => {
+        if (!user) {
+          throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        }
+        const { password, ...userWithoutPassword } = user
+        return userWithoutPassword;
+      })
     );
   }
 

@@ -1,4 +1,4 @@
-import { User } from "./user.interface";
+import { User } from "./user.class";
 
 export type FriendRequestStatus =
   | "not-sent"

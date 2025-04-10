@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { from, map, Observable, switchMap } from "rxjs";
 import * as bcrypt from "bcrypt";
-import { User, UserSafe } from "../models/user.interface";
+import { User, UserSafe } from "../models/user.class";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserEntity } from "../models/user.entity";
 import { JwtService } from "@nestjs/jwt";

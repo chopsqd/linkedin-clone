@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { FeedService } from "../services/feed.service";
-import { User } from "../../auth/models/user.interface";
+import { User } from "../../auth/models/user.class";
 import { map, Observable, switchMap } from "rxjs";
 import { FeedPost } from "../models/post.interface";
 import { UserService } from "../../auth/services/user.service";

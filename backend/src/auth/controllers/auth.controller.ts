@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { map, Observable } from "rxjs";
-import { User, UserSafe } from "../models/user.interface";
+import { User, UserSafe } from "../models/user.class";
 import { AuthService } from "../services/auth.service";
 
 @Controller("auth")

@@ -5,7 +5,7 @@ import {Post} from '../../models';
 import {PostService} from '../../services/post.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
-import { User } from "../../../auth/models/user.model";
+import { User } from '../../../auth/models/user.model';
 
 @Component({
   selector: 'app-all-posts',
@@ -54,9 +54,6 @@ export class AllPostsComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         this.skipPosts += 5;
-      },
-      (error) => {
-        console.log('getPosts error:', error);
       });
   }
 

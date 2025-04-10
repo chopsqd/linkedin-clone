@@ -17,7 +17,7 @@ import { join } from "path";
 import { UserService } from "../services/user.service";
 import { JwtGuard } from "../guards/jwt.guard";
 import { isFileExtensionSafe, removeFile, saveImageToStorage } from "../utils/image-storage";
-import { User, UserSafe } from "../models/user.interface";
+import { User, UserSafe } from "../models/user.class";
 import { FriendRequest, FriendRequestStatus } from "../models/friend-request.interface";
 
 @Controller("user")
