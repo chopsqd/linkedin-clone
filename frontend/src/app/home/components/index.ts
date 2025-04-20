@@ -9,3 +9,4 @@ export * from './tabs/tabs.component';
 export * from './connection-profile/connection-profile.component';
 export * from './user-profile/user-profile.component';
 export * from './requests-popover/requests-popover.component';
+export * from './chat/chat.component';

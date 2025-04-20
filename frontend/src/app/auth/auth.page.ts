@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './auth.page.html',
   styleUrls: ['./auth.page.scss']
 })
-export class AuthPage implements OnInit {
+export class AuthPage {
   @ViewChild('form') form: NgForm;
 
   submissionType: 'login' | 'join' = 'login';
@@ -43,6 +43,4 @@ export class AuthPage implements OnInit {
       ? 'join'
       : 'login';
   }
-
-  ngOnInit() {}
 }

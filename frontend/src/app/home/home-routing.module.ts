@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
-import { ConnectionProfileComponent, UserProfileComponent } from './components';
+import { ChatComponent, ConnectionProfileComponent, UserProfileComponent } from './components';
 
 const routes: Routes = [
   {
     path: '',
     component: HomePage,
     children: [
-      { path: '', component: UserProfileComponent },
-      { path: ':id', component: ConnectionProfileComponent }
-    ]
+      {
+        path: '',
+        component: UserProfileComponent
+      },
+      {
+        path: ':id',
+        component: ConnectionProfileComponent,
+      },
+      {
+        path: 'chat/connections',
+        component: ChatComponent,
+      },
+    ],
   },
-  {
-    path: ':id',
-    component: ConnectionProfileComponent
-  }
 ];
 
 @NgModule({

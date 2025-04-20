@@ -18,9 +18,9 @@ export class ConnectionProfileComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    public bannerColorService: BannerColorService,
-    private route: ActivatedRoute,
-    private connectionProfileService: ConnectionProfileService
+    public readonly bannerColorService: BannerColorService,
+    private readonly route: ActivatedRoute,
+    private readonly connectionProfileService: ConnectionProfileService
   ) {}
 
   ngOnInit(): void {

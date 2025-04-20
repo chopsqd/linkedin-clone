@@ -12,8 +12,8 @@ import {
   ProfileSummaryComponent,
   StartPostComponent, TabsComponent,
   ConnectionProfileComponent, UserProfileComponent,
-  RequestsPopoverComponent
-} from './components';
+  RequestsPopoverComponent, ChatComponent
+} from "./components";
 
 @NgModule({
   imports: [
@@ -25,6 +25,7 @@ import {
   declarations: [
     HomePage,
     AllPostsComponent,
+    ChatComponent,
     AdvertisementComponent,
     BasePopoverComponent,
     ConnectionProfileComponent,

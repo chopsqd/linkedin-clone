@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import * as process from "process";
 import { APP_FILTER } from "@nestjs/core";
 import { AllExceptionsFilter } from "./core/all-exceptions.filter";
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { AllExceptionsFilter } from "./core/all-exceptions.filter";
       synchronize: true
     }),
     FeedModule,
-    AuthModule
+    AuthModule,
+    ChatModule
   ],
   providers: [{
     provide: APP_FILTER,

@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {PostModalComponent} from "../post-modal/post-modal.component";
+import {PostModalComponent} from '../post-modal/post-modal.component';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent {
   constructor(public modalController: ModalController) {}
 
   async presentModal() {
@@ -21,8 +21,6 @@ export class TabsComponent implements OnInit {
     if (!data) {
       return;
     }
-    console.log('DATA', data)
+    console.log('DATA', data);
   }
-
-  ngOnInit() {}
 }

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
-import { from, map, Observable, switchMap } from "rxjs";
+import { catchError, from, map, Observable, of, switchMap, tap } from "rxjs";
 import * as bcrypt from "bcrypt";
 import { User, UserSafe } from "../models/user.class";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -17,6 +17,12 @@ export class AuthService {
 
   private hashPassword(password: string): Observable<string> {
     return from(bcrypt.hash(password, 10));
+  }
+
+  private doesUserExist(email: string): Observable<boolean> {
+    return from(this.userRepository.findOne({ email })).pipe(
+      map(user => !!user)
+    );
   }
 
   private validateUser(email: string, password: string): Observable<UserSafe> {
@@ -54,9 +60,25 @@ export class AuthService {
   registerAccount(user: User): Observable<UserSafe> {
     const { firstName, lastName, email, password } = user;
 
-    return this.hashPassword(password).pipe(
+    return this.doesUserExist(email).pipe(
+      tap((doesUserExist: boolean) => {
+        if (doesUserExist) {
+          throw new HttpException(
+            'A user has already been created with this email address',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+      }),
+      switchMap(() => this.hashPassword(password)),
       switchMap((hashedPassword: string) =>
-        from(this.userRepository.save({ firstName, lastName, email, password: hashedPassword }))
+        from(
+          this.userRepository.save({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+          }),
+        ),
       ),
       map(({ password, ...userWithoutPassword }: User) => userWithoutPassword)
     );
@@ -69,6 +91,13 @@ export class AuthService {
       switchMap((userSafe: UserSafe) =>
         from(this.jwtService.signAsync({ user: userSafe }))
       )
+    );
+  }
+
+  getJwtUser(jwt: string): Observable<User | null> {
+    return from(this.jwtService.verifyAsync(jwt)).pipe(
+      map(({ user }: { user: User }) => user),
+      catchError(() => of(null)),
     );
   }
 }

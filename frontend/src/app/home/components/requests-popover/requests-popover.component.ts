@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { PopoverController } from "@ionic/angular";
-import { ConnectionProfileService } from "../../services/connection-profile.service";
-import { FriendRequest } from "../../models";
-import { take, tap } from "rxjs";
-import { User } from "../../../auth/models/user.model";
-import { environment } from "../../../../environments/environment";
+import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { ConnectionProfileService } from '../../services/connection-profile.service';
+import { FriendRequest } from '../../models';
+import { take, tap } from 'rxjs';
+import { User } from '../../../auth/models/user.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-requests-popover',

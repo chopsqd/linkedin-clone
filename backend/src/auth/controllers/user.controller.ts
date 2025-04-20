@@ -43,7 +43,7 @@ export class UserController {
     return isFileExtensionSafe(fullImagePath).pipe(
       switchMap((isFileLegit: boolean) => {
         if (!isFileLegit) {
-          removeFile(fullImagePath); // Удаляем файл, если он не прошел проверку
+          removeFile(fullImagePath);
           return of({ error: "File content does not match extension!" });
         }
 

@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 export class ConnectionProfileService {
   friendRequests: FriendRequest[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getConnectionUser(id: number): Observable<User> {
     return this.http.get<User>(`${environment.baseApiUrl}/user/${id}`);

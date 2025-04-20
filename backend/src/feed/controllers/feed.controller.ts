@@ -23,8 +23,8 @@ import { IsCreatorGuard } from "../guards/is-creator.guard";
 export class FeedController {
   constructor(private readonly feedService: FeedService) {}
 
-  // @Roles(Role.ADMIN, Role.PREMIUM)
-  // @UseGuards(JwtGuard, RolesGuard)
+  @Roles(Role.ADMIN, Role.PREMIUM)
+  @UseGuards(JwtGuard, RolesGuard)
   @UseGuards(JwtGuard)
   @Post()
   create(
